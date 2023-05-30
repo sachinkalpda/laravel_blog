@@ -8,18 +8,16 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">All Categories 
+                        <h4 class="card-title">Trash
                             <div class="header-links">
-                                <a href="{{ route('category.add') }}" class="btn btn-inverse-success btn-icon"><i class="mdi mdi-note-plus-outline"></i></a>
-                                <a href="{{ route('category.trashed') }}" class="btn btn-inverse-danger btn-icon"><i class="mdi mdi-delete"></i></a>
+                                <a href="{{ route('category.all') }}" class="btn btn-inverse-success btn-icon"><i class="mdi mdi-keyboard-backspace"></i></a>
+                                
                             </div></h4>
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="table">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Slug</th>
-                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -28,10 +26,8 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $category->title }}</td>
-                                    <td >{{ $category->slug }}</td>
-                                    <td><label class="badge  @if($category->status == 1) {{ 'badge-success'}} @else {{ 'badge-danger' }} @endif">@if($category->status == 1) {{ 'Active'}} @else {{ 'Inactive' }} @endif</label></td>
-                                    <td><a href="{{ route('category.edit',[$category->id ]) }}" class="text-primary"><i class="mdi mdi mdi-grease-pencil"></i></a>
-                                <a href="{{ route('category.delete',[$category->id ]) }}" class="text-danger"><i class="mdi mdi-delete"></i></a></td>
+                                    <td><a href="{{ route('category.restore',[$category->id ]) }}" class="btn btn-primary">Restore</a>
+                                <a href="{{ route('category.destroy',[$category->id ]) }}" class="btn btn-danger" id="delete">Delete</a></td>
                                 </tr>
                                 @endforeach
                                 
