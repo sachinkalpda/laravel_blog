@@ -204,17 +204,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <span class="menu-title">Basic UI Elements</span>
-              <i class="menu-arrow"></i>
-              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+            <a class="nav-link" href="{{ route('post.all') }}">
+              <span class="menu-title">Posts</span>
+              <i class="mdi mdi-contacts menu-icon"></i>
             </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-              </ul>
-            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('category.all') }}">
@@ -302,6 +295,7 @@
   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
   <script src="https://cdn.datatables.net/1.13.4/js/dataTables.material.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.8/dist/sweetalert2.all.min.js" integrity="sha256-IsLtAJoYEjP85/w1aVUZtzdlpsQXYcXPXqfk4JDyt+I=" crossorigin="anonymous"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
 
   <script>
     $(document).ready(function() {
@@ -342,48 +336,58 @@
     $(document).ready(function() {
       $('#table').DataTable({
         autoWidth: false,
-        columnDefs: [
-            {
-                targets: ['_all'],
-                className: 'mdc-data-table__cell',
-            },
-        ],
+        columnDefs: [{
+          targets: ['_all'],
+          className: 'mdc-data-table__cell',
+        }, ],
       });
     });
   </script>
 
-<script>
+  <script>
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-right',
+      iconColor: 'white',
+      customClass: {
+        popup: 'colored-toast'
+      },
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true
+    })
+  </script>
 
-const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-right',
-  iconColor: 'white',
-  customClass: {
-    popup: 'colored-toast'
-  },
-  showConfirmButton: false,
-  timer: 1500,
-  timerProgressBar: true
-})
-</script>
+  @if(Session::has('success'))
+  <script>
+    Toast.fire({
+      icon: 'success',
+      title: "{{Session::get('success')}}"
+    })
+  </script>
+  @endif
 
-@if(Session::has('success'))
-<script>
- Toast.fire({
-  icon: 'success',
-  title: "{{Session::get('success')}}"
-})
-</script>
-@endif
+  @if(Session::has('error'))
+  <script>
+    Toast.fire({
+      icon: 'error',
+      title: "{{Session::get('error')}}"
+    })
+  </script>
+  @endif
 
-@if(Session::has('error'))
-<script>
- Toast.fire({
-  icon: 'error',
-  title: "{{Session::get('error')}}"
-})
-</script>
-@endif
+
+
+  <script>
+    ClassicEditor
+      .create(document.querySelector('#editor'))
+      .then(editor => {
+        console.log(editor);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  </script>
 
   <!-- End custom js for this page -->
 </body>

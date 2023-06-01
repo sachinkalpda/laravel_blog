@@ -83,7 +83,7 @@ class CategoryController extends Controller
 
     public function delete (string $id){
         Category::where('id',$id)->delete();
-        session('flash','Category Deleted!');
+        session()->flash('success','Category Deleted!');
         return redirect()->back();
     }
 
