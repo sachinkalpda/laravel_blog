@@ -29,17 +29,9 @@
 
 <body>
   <div class="container-scroller">
-
-    <x-admin.navbar />
-   
-    <div class="container-fluid page-body-wrapper">
-
-      <x-admin.sidebar />
     
       @section('container')
       @show
-      <!-- main-panel ends -->
-    </div>
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->

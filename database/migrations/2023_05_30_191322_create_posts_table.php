@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('image');
             $table->string('image_url');
             $table->foreignId('category_id');
+            $table->foreignId('author_id');
             $table->integer('views')->default(0);
             $table->integer('likes')->default(0);
             $table->integer('status');
